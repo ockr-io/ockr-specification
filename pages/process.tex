@@ -1,0 +1,28 @@
+\documentclass[../ockr-specification.tex]{subfiles}
+\begin{document}
+
+\section{Process}
+
+To decouple the information from the file, the raw information needs to be provided and a hash of the information needs to be calculated. This hash will be used to verify the authenticity of the information and stored within a QR code on the document. Besides the hash, the QR code will also contain metadata helping a machine to re-create the information.
+
+\subsection{Document creation}
+
+As most of the documents are created digitally, the raw text can be extracted from the file such as DOCX, XLSX, PDF and other formats. In case there is no raw text available, OCR can be used to extract the text from the document but a human would need to verify the text.
+
+\subsection{OCR verification}
+
+There is no internet connection needed and no additional service required to verify the ORC result. Therefore data pipelines can ensure to have a reliable OCR result in critical processes. An algorithm breaks down the document in different parts and verifies the OCR result of each part. The algorithm can be implemented in any programming language and can be used in any environment. Besides the main hash of the information a hash of each part will be calculated and stored within the QR code. There are chars that are often misinterpreted by OCR like 0 and O. With having the hash of each part, different combinations of chars can be tried to find the correct result.
+
+\subsection{Guarantee authenticity}
+
+An open source backend service will be publicly available to register an information hash on a blockchain by a certain authority. The authority can be a person or an organization. The service will be available as a REST API. As the hash is registered on a blockchain, it would not match anymore if the information or QR code would be maliciously changed.
+
+\subsection{Authorship verification}
+
+The authority that registered the information would also need a registration on the blockchain. Anyone can register a new authority but to give a certain authority more credibility, the authority can be verified by other authorities.
+
+\subsection{Trust Trees}
+
+The trust tree is a graph of authorities that trust each other. An algorithm will be provided to calculate the trust tree and its score. The score can be used to determine the credibility of an authority.
+
+\end{document}

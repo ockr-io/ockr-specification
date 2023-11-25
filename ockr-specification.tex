@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{subfiles}
+\usepackage{hyperref}
+
+\title{Ockr Specification}
+
+\author{
+  Bormann, Fabian\\
+  \texttt{bormann.fabian@gmail.com}
+  \and
+  Ockr GitHub Community\\
+  \href{https://github.com/ockr-io/ockr-specification/graphs/contributors}{Contributors}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+
+Ockr aims to set a standard for creating machine-readable and reliable documents, 
+enabling the verification of their authenticity. In short Ockr tries to tackle 
+three problems:
+
+\begin{enumerate}
+    \item How can we make sure that a document is machine-readable?
+    \item How can we ensure that a document has not been modified?
+    \item How can we ensure that a document really has been issued by a certain authority?
+\end{enumerate}
+
+\subfile{pages/motivation}
+\subfile{pages/process}
+\subfile{pages/algorithms}
+\subfile{pages/implementation}
+
+\end{document}
