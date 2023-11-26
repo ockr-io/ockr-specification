@@ -3,4 +3,58 @@
 
 \section{Algorithms}
 
+Algorithms need to ensure that an OCR result is reliable. The first set of algorithms will be used to extract the information from the document. Besides of the OCR algorithm itself, they will also include algorithms to build the information hash from the OCR output. Those will be open source and are part of the Ockr umbrella. They provive something like the syntax for the OCR scan results. The second set of algorithms will be used to give the results a semantic. Those are called templates and they are optional. Templates will not be part of any repository. They can be registered on-chain using the REST API. Templates can be used to give an automated process the relevant values. For example a value relative to certain anchor words could defined as the product weight on a delivery note to calculate the shipping costs for an automated process.
+
+\subsection{OCR Algorithms}
+
+PP-OCRv4-mobile and PP-OCRv4-server are part of PaddleOCR and will be provided as ONNX models in the Ockr model zoo. The model zoo will be an open source repository where everyone can contribute OCR models or enhance the existing ones. A model should run isolated and wrapped by a REST API capsulated in a Docker container. The blueprint will use Fast API and the Docker image will be provided alongside to the code as a reference implementation.
+
+\subsection{Templates}
+
+A template consists of a set of anchors, such as the OR code or other required words, and a set of keys including releative positions to a subset of anchors. The anchors are used to find the values for the keys in the OCR result. The values can be defined as a match to a key, or as a regex matching the key. The template structure will be defined as a JSON schema and can be registered on-chain using the REST API and a Cardano matadata standard. An offline template editor will be provided to create and edit templates. The editor will be open source and can be used as a reference implementation for other validators or editors.
+
+\begin{lstlisting}
+    
+    interface Template {
+        anchors: Anchor[];
+        keys: Key[];
+    }
+
+    interface Anchor {
+        type: AnchorType;
+        reference: BoderSide | string;
+    }
+
+    enum BorderSide {
+        Top,
+        Right,
+        Bottom,
+        Left
+    }
+
+    enum AnchorType {
+        QRCode,
+        Text,
+        Border
+    }
+
+    // regex is optional otherwise the full ocr result will be used
+    interface Key {
+        name: string;
+        regex: string;
+        matcher: {
+            anchor: number;
+            position: Position;
+        } 
+    }
+
+    // relative between 0 and 1
+    interface Position {
+        x: number;
+        y: number;
+        tolerance: number;
+    }
+    
+\end{lstlisting}
+
 \end{document}

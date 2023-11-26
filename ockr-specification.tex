@@ -1,21 +1,47 @@
 \documentclass{article}
 \usepackage{subfiles}
 \usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{qrcode}
 
 \title{Ockr Specification}
 
 \author{
   Bormann, Fabian\\
-  \texttt{bormann.fabian@gmail.com}
+  \texttt{fabian.bormann@ockr.io}
   \and
-  Ockr GitHub Community\\
-  \href{https://github.com/ockr-io/ockr-specification/graphs/contributors}{Contributors}
+  \qrcode{https://github.com/ockr-io/ockr-specification/graphs/contributors}
 }
 \date{\today}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 \begin{document}
 
 \maketitle
+
+\tableofcontents
 
 \section{Abstract}
 
