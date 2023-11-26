@@ -1,4 +1,5 @@
 \documentclass[../ockr-specification.tex]{subfiles}
+
 \begin{document}
 
 \section{Algorithms}
@@ -8,6 +9,40 @@ Algorithms need to ensure that an OCR result is reliable. The first set of algor
 \subsection{OCR Algorithms}
 
 PP-OCRv4-mobile and PP-OCRv4-server are part of PaddleOCR and will be provided as ONNX models in the Ockr model zoo. The model zoo will be an open source repository where everyone can contribute OCR models or enhance the existing ones. A model should run isolated and wrapped by a REST API capsulated in a Docker container. The blueprint will use Fast API and the Docker image will be provided alongside to the code as a reference implementation.
+
+\subsection{Hash Algorithms}
+
+SHA256 will be used as the hash algorithm. The hash will be calculated from the intial information during the content creation process. In the verification processs it will be calculated from the OCR result and a naive string concatenation approach. As this solution is not reliable enough, SHA256 will be applied also to the output of a post-processing method, introduced as puzzle algorithms.
+
+\subsection{Puzzle Algorithms}
+
+The puzzle algorithms will be used to break down the image in different parts. Each part will be hashed by SHA256 and stored within the QR code. The puzzle algorithms will be open source and can be used as a reference implementation for other algorithms. A simple and default algorithm will be described in the following section.
+
+\subsubsection{Default Puzzle Algorithm}
+
+The default algorithm takes the image and splits it into $n$ parts. It takes $x$ and $y$ as parameters to define the number of parts. The image will be split into $x$ parts horizontally and $y$ parts vertically. The parts will be hashed by SHA256 and stored within the QR code. 
+
+\begin{algorithm}[H]
+    \caption{Default Puzzle Algorithm}\label{alg:cap}
+    \begin{algorithmic}
+    \Require $OcrResults$
+    \Require $x \geq 1$
+    \Require $y \geq 1$
+    
+    \State $subHashes \gets []$
+
+    \For{ $i \gets x$ to $x$ }
+        \For{ $j \gets y$ to $y$ }
+            \State $results \gets getOcrResultsUnderArea(x, y)$
+            \State $hash \gets SHA256(concat(results))$
+            \State $subHashes \gets append(hash)$
+        \EndFor
+    \EndFor
+
+    \State \Return $subHashes$
+
+    \end{algorithmic}
+\end{algorithm}
 
 \subsection{Templates}
 
@@ -56,5 +91,5 @@ A template consists of a set of anchors, such as the OR code or other required w
     }
     
 \end{lstlisting}
-
+\newpage
 \end{document}

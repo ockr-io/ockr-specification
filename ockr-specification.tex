@@ -1,10 +1,12 @@
 \documentclass{article}
 \usepackage{subfiles}
-\usepackage{hyperref}
+\usepackage{float}
 \usepackage{titlesec}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{qrcode}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \title{Ockr Specification}
 
@@ -42,6 +44,7 @@
 \maketitle
 
 \tableofcontents
+\newpage
 
 \section{Abstract}
 
@@ -54,6 +57,7 @@ three problems:
     \item How can we ensure that a document has not been modified?
     \item How can we ensure that a document really has been issued by a certain authority?
 \end{enumerate}
+\newpage
 
 \subfile{pages/motivation}
 \subfile{pages/process}
