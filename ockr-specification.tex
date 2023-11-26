@@ -57,8 +57,10 @@ three problems:
     \item How can we ensure that a document has not been modified?
     \item How can we ensure that a document really has been issued by a certain authority?
 \end{enumerate}
-\newpage
 
+Process automation is an important topic across different industries as well as certification processes or even for governments. In the past years many processes became paperless and digital. However, there are still processes that following hybrid approches or are still fully paper-based. If many different parties are involved in a process, it is often hard to keep track of the current status for example in logistics, medicine, student certifications or documents issued by the government. Blockchain technology can be used as a trust anchor to ensure the authenticity of a document. However, the information itself is not stored on-chain. Files are used to store the information and hashes of these files are stored on-chain. Due to compression techniques or printing the file remains visually the same but the hash changes. In logistics it is often required to attach a paper document to the actual good because it is not possible to share files with all parties involved. Many Universities and schools are issuing digital certificates nowadays but to apply for a job, the certificate needs sometimes compression techniques or even printing to be shared with the employer. There are many different scenarios having the same problem: The document has been created digitally but due to printing, compression or conversions, it is not machine-readable anymore. Ockr aims to solve this problem by providing a standard for creating machine-readable and reliable documents. A QR code is used to store a hash of the acutal information alongside the document. The QR code also contains metadata supporting an OCR algorithm to re-create the correct information. This ensures reliable process automation in hybrid environments and decouples the actual information from the file container.
+
+\newpage
 \subfile{pages/motivation}
 \subfile{pages/process}
 \subfile{pages/algorithms}

@@ -38,7 +38,7 @@ The Ockr REST API is the main interface to interact with the Ockr ecosystem. It 
     }
 
     // Registers a new authority on-chain
-    // The authority will be co-signed by the registering service as the first validator
+    // The authority can be co-signed by the registering service as the first validator
 
     POST /register/authority
 
@@ -76,6 +76,32 @@ The Ockr REST API is the main interface to interact with the Ockr ecosystem. It 
     POST /connect/model
 
 \end{lstlisting}
+
+The API will implement a yaci store starter to fetch templates, authorities and information hashes from the blockchain. Those will be stored in a local database.
+
+\subsection{Ockr Frontend}
+
+The Ockr frontend is a web application that can be used to validate and register information hashes on-chain, to register and look up authorities and to register and test templates. The frontend is implemented using React and will be available as an open source project under the Ockr umbrella. The frontend will be available at \textit{ockr.io}.
+
+\subsection{Ockr Model Zoo}
+
+The Ockr model zoo is a collection of OCR models that can be used to extract information from documents. The prefered model format is ONNX. The model zoo will be available as an open source project under the Ockr umbrella.
+
+\subsection{Ockr OCR containers}
+
+An Ockr OCR container offers a FastAPI REST-service within in a docker container, that can be used to extract information from documents. It uses models e.g. from the Ockr model zoo to extract the information. The containers will be available as an open source projects under the Ockr umbrella. In its environment variables the container has a reference to the Ockr REST API. The container will connect itself to the Ockr REST API on startup. The API can be configured to block new connections. Besides a health check endpoint, the container offers an endpoint to perform the actual OCR. The OCR endpoint will be available at \textit{localhost:8000/predict [POST]}. It assumes a base64 encoded image. The output will be a JSON object containing the OCR result.
+
+\subsection{Ockr plugins}
+
+Ockr plugins are plugins for common document editors that can be used to extract the information from the document and to create the Ockr QR code. The plugins will be available as an open source projects under the Ockr umbrella. The first plugins/add-ons on the roadmap are for Google Docs, Google Sheet, Google Slides, Microsoft Word, Microsoft Powerpoint, Microsoft Excel. The first iteration of the plugins will only provide a QR code generation that is complitant to the Ocr standard, to ensure that the information can be extracted from the document and processed by a machine. The second iteration will also provide the registration process. This could be the more challenging part, as it has a dependency to the Cardano blockchain and needs ADA to submit the transaction.
+
+\subsection{Ockr App}
+
+The Ockr app is a mobile application that can be used to validate information hashes. It will be available as an open source project under the Ockr umbrella. The app will be available for Android and iOS. Ionic will be used to build the app. The OCR model will be provided using ONNX.js and a model from the Ockr model zoo.
+
+\subsection{Chain Submitter Service}
+
+The chain submitter service is a backend service that can be used to submit transactions to the Cardano blockchain. It will be available as part of the Ockr api repository. Java Spring Boot will be used to implement the service. The service will also be available as a Docker image.
 
 \newpage
 \end{document}
