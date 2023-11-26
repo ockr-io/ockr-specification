@@ -2,5 +2,80 @@
 \begin{document}
 
 \section{Implementation}
+
+There are different parts mentioned in the algorithm and process section. This section will describe the implementation of those parts and the concret implementation.
+
+\subsection{Ockr REST API}
+
+The Ockr REST API is the main interface to interact with the Ockr ecosystem. It is used to register information hashes on-chain, to register authorities and to register templates. The API is implemented using Java Sprint Boot. It will be available as an open source project under the Ockr umbrella. The API will be available as a Docker image which allows companies to run it in their own environment instead of using the public API. The public API will be available at \textit{api.ockr.io/v1}.
+
+\subsubsection{Endpoints}
+
+\begin{lstlisting}
+    // Registers a new information hash on-chain
+
+    POST /register/hash
+
+    // Request Body
+    {
+        "hash": "string",
+        "signature": "string",
+        "template": "string" | undefined,
+        "subHashes": ["string"] | undefined,
+        "algorithm": "string" | undefined,
+    }
+
+    // Registers a new template on-chain
+    // Template is a JSON schema described in the algorithms section
+    // The template will be minified and validated 
+
+    POST /register/template
+
+    // Request Body
+    {
+        "template": Template,
+        "signature": "string",
+    }
+
+    // Registers a new authority on-chain
+    // The authority will be co-signed by the registering service as the first validator
+
+    POST /register/authority
+
+    // Request Body
+    {
+        "name": "string",
+        "signature": "string",
+    }
+
+    // Returns the trust tree of an authority if the hash matches with a registered information hash on-chain
+
+    POST /verify/hash
+
+    // Request Body
+    {
+        "hash": "string",
+        "template": "string" | undefined,
+        "subHashes": ["string"] | undefined,
+    }
+
+    // Returns all templates that have been registered on-chain
+
+    GET /template
+
+    // Returns a template by id
+
+    GET /template/{id}
+
+    // Returns all models connected to the api
+
+    GET /model
+
+    // Connects a model to the api
+
+    POST /connect/model
+
+\end{lstlisting}
+
 \newpage
 \end{document}
